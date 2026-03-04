@@ -12,7 +12,7 @@
 
     <div class="min-h-screen">
 
-        @include('layouts.navBarBoots')
+        @include('layouts.navbar')
 
         <main>
             @yield('content')
