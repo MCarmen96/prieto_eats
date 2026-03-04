@@ -144,8 +144,14 @@ unset($__errorArgs, $__bag); ?>
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center gap-3">
-                                                <img src="<?php echo e(asset($dish->image)); ?>" width="50" height="50"
-                                                     class="rounded-3 shadow-sm object-fit-cover" alt="<?php echo e($dish->name); ?>">
+                                                <?php if($dish->image): ?>
+                                                    <img src="<?php echo e(asset('storage/' . $dish->image)); ?>" width="50" height="50"
+                                                         class="rounded-3 shadow-sm object-fit-cover" alt="<?php echo e($dish->name); ?>">
+                                                <?php else: ?>
+                                                    <div class="rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-center text-secondary" style="width:50px; height:50px;">
+                                                        <i class="bi bi-image"></i>
+                                                    </div>
+                                                <?php endif; ?>
                                                 <span class="fw-bold text-dark"><?php echo e($dish->name); ?></span>
                                             </div>
                                         </td>

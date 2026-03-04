@@ -90,8 +90,14 @@
 
                                                 
                                                 <td>
-                                                    <img src="<?php echo e(asset($prod->image)); ?>" width="72" height="72"
-                                                         class="rounded-3 shadow-sm object-fit-cover" alt="<?php echo e($prod->name); ?>">
+                                                    <?php if($prod->image): ?>
+                                                        <img src="<?php echo e(asset('storage/' . $prod->image)); ?>" width="72" height="72"
+                                                             class="rounded-3 shadow-sm object-fit-cover" alt="<?php echo e($prod->name); ?>">
+                                                    <?php else: ?>
+                                                        <div class="rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-center text-secondary" style="width:72px; height:72px;">
+                                                            <i class="bi bi-image"></i>
+                                                        </div>
+                                                    <?php endif; ?>
                                                 </td>
                                                 
                                                 

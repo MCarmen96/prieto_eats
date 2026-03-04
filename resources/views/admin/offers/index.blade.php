@@ -62,11 +62,17 @@
                                 </td>
                                 
                                 {{-- Assuming one product per offer row based on original code structure --}}
-                                @foreach($offer->productsOffer as $prod)
+                                                        @foreach($offer->productsOffer as $prod)
                                     <td class="fw-bold text-dark">{{ $prod->product->name }}</td>
                                     <td>
-                                        <img src="{{ asset($prod->product->image) }}" width="60" height="60"
-                                             class="rounded-3 shadow-sm object-fit-cover" alt="{{ $prod->product->name }}">
+                                        @if($prod->product->image)
+                                            <img src="{{ asset('storage/' . $prod->product->image) }}" width="60" height="60"
+                                                 class="rounded-3 shadow-sm object-fit-cover" alt="{{ $prod->product->name }}">
+                                        @else
+                                            <div class="rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-center text-secondary" style="width:60px; height:60px;">
+                                                <i class="bi bi-image"></i>
+                                            </div>
+                                        @endif
                                     </td>
                                     <td>
                                         <div class="text-muted small text-truncate" style="max-width: 200px;">

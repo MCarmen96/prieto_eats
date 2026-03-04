@@ -115,8 +115,14 @@
                                         </td>
                                         <td>
                                             <div class="d-flex align-items-center gap-3">
-                                                <img src="{{ asset($dish->image) }}" width="50" height="50"
-                                                     class="rounded-3 shadow-sm object-fit-cover" alt="{{ $dish->name }}">
+                                                @if($dish->image)
+                                                    <img src="{{ asset('storage/' . $dish->image) }}" width="50" height="50"
+                                                         class="rounded-3 shadow-sm object-fit-cover" alt="{{ $dish->name }}">
+                                                @else
+                                                    <div class="rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-center text-secondary" style="width:50px; height:50px;">
+                                                        <i class="bi bi-image"></i>
+                                                    </div>
+                                                @endif
                                                 <span class="fw-bold text-dark">{{ $dish->name }}</span>
                                             </div>
                                         </td>

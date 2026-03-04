@@ -39,11 +39,15 @@
                                 <div class="card card-pe h-100">
                                     
                                     <div class="position-relative overflow-hidden">
-                                        <div style="height:240px; overflow:hidden;">
-                                            <img src="<?php echo e(asset($item->product->image)); ?>"
-                                                 class="card-img-top w-100 h-100"
-                                                 style="object-fit:cover; transition: transform 0.5s;"
-                                                 alt="<?php echo e($item->product->name); ?>">
+                                        <div style="height:240px; overflow:hidden;" class="bg-light d-flex align-items-center justify-content-center">
+                                            <?php if($item->product->image): ?>
+                                                <img src="<?php echo e(asset('storage/' . $item->product->image)); ?>"
+                                                     class="card-img-top w-100 h-100"
+                                                     style="object-fit:cover; transition: transform 0.5s;"
+                                                     alt="<?php echo e($item->product->name); ?>">
+                                            <?php else: ?>
+                                                <i class="bi bi-image text-secondary fs-1 opacity-25"></i>
+                                            <?php endif; ?>
                                         </div>
                                         <span class="badge-price position-absolute top-0 end-0 m-3 shadow">
                                             <?php echo e(number_format($item->product->price, 2)); ?> €

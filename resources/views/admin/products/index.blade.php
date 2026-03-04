@@ -50,10 +50,16 @@
                         </thead>
                         <tbody>
                             @foreach($dishes as $dish)
-                            <tr class="border-bottom border-light">
+                            <tr>
                                 <td class="ps-4 py-3">
-                                    <img src="{{ asset($dish->image) }}" width="72" height="72"
-                                         class="rounded-3 shadow-sm object-fit-cover" alt="{{ $dish->name }}">
+                                    @if($dish->image)
+                                        <img src="{{ asset('storage/' . $dish->image) }}" width="72" height="72"
+                                             class="rounded-3 shadow-sm object-fit-cover" alt="{{ $dish->name }}">
+                                    @else
+                                        <div class="rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-center text-secondary" style="width:72px; height:72px;">
+                                            <i class="bi bi-image fs-4"></i>
+                                        </div>
+                                    @endif
                                 </td>
                                 <td class="py-3">
                                     <span class="fw-bold text-dark">{{ $dish->name }}</span>

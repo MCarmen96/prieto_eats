@@ -52,10 +52,16 @@
                         </thead>
                         <tbody>
                             <?php $__currentLoopData = $dishes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dish): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                            <tr class="border-bottom border-light">
+                            <tr>
                                 <td class="ps-4 py-3">
-                                    <img src="<?php echo e(asset($dish->image)); ?>" width="72" height="72"
-                                         class="rounded-3 shadow-sm object-fit-cover" alt="<?php echo e($dish->name); ?>">
+                                    <?php if($dish->image): ?>
+                                        <img src="<?php echo e(asset('storage/' . $dish->image)); ?>" width="72" height="72"
+                                             class="rounded-3 shadow-sm object-fit-cover" alt="<?php echo e($dish->name); ?>">
+                                    <?php else: ?>
+                                        <div class="rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-center text-secondary" style="width:72px; height:72px;">
+                                            <i class="bi bi-image fs-4"></i>
+                                        </div>
+                                    <?php endif; ?>
                                 </td>
                                 <td class="py-3">
                                     <span class="fw-bold text-dark"><?php echo e($dish->name); ?></span>

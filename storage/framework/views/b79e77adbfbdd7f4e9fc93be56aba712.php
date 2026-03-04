@@ -116,7 +116,7 @@ unset($__errorArgs, $__bag); ?>
                         <label class="form-label fw-bold small text-uppercase text-secondary">Imagen Actual</label>
                         <?php if($product->image): ?>
                             <div class="mb-3 position-relative">
-                                <img src="<?php echo e(asset($product->image)); ?>" alt="Imagen actual"
+                                <img src="<?php echo e(asset('storage/' . $product->image)); ?>" alt="Imagen actual"
                                      class="img-thumbnail rounded-3 shadow-sm w-100 object-fit-cover" style="max-height: 200px;">
                                 <div class="position-absolute bottom-0 start-0 w-100 p-2 bg-dark bg-opacity-50 text-white text-center rounded-bottom-3 small">
                                     Imagen actual

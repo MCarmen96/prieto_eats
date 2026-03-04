@@ -64,11 +64,17 @@
                                 </td>
                                 
                                 
-                                <?php $__currentLoopData = $offer->productsOffer; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prod): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php $__currentLoopData = $offer->productsOffer; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $prod): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                     <td class="fw-bold text-dark"><?php echo e($prod->product->name); ?></td>
                                     <td>
-                                        <img src="<?php echo e(asset($prod->product->image)); ?>" width="60" height="60"
-                                             class="rounded-3 shadow-sm object-fit-cover" alt="<?php echo e($prod->product->name); ?>">
+                                        <?php if($prod->product->image): ?>
+                                            <img src="<?php echo e(asset('storage/' . $prod->product->image)); ?>" width="60" height="60"
+                                                 class="rounded-3 shadow-sm object-fit-cover" alt="<?php echo e($prod->product->name); ?>">
+                                        <?php else: ?>
+                                            <div class="rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-center text-secondary" style="width:60px; height:60px;">
+                                                <i class="bi bi-image"></i>
+                                            </div>
+                                        <?php endif; ?>
                                     </td>
                                     <td>
                                         <div class="text-muted small text-truncate" style="max-width: 200px;">

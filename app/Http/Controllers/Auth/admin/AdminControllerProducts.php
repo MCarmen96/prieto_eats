@@ -104,7 +104,32 @@ class AdminControllerProducts extends Controller{
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([
+            "name" => "required|string",
+            "description" => "required|string",
+            "price" => "required|numeric",
+            "image" => "nullable|mimes:jpg,jpeg,png"
+        ]);
+
+        try {
+            $product = Product::findOrFail($id);
+            $product->name = $request->input("name");
+            $product->description = $request->input("description");
+            $product->price = $request->input("price");
+
+            if ($request->hasFile('image')) {
+                // Guardamos la nueva imagen y actualizamos la ruta
+                $rutaImage = $request->file('image')->store('uploads', 'public');
+                $product->image = $rutaImage;
+            }
+
+            $product->save();
+
+            return redirect()->route("admin.products.index")->with("exito", "Producto actualizado correctamente");
+
+        } catch (\Exception $e) {
+            return back()->with('error', 'Error al actualizar: ' . $e->getMessage());
+        }
     }
 
     /**
