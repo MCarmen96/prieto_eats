@@ -1,24 +1,26 @@
-@extends('layouts.layout')
 
-@section('content')
+
+<?php $__env->startSection('content'); ?>
 <div class="container mt-5 mb-5" style="min-height:60vh;">
 
-    @if(session('error'))
+    <?php if(session('error')): ?>
         <div class="alert alert-danger alert-dismissible fade show rounded-3 shadow-sm border-0" role="alert">
-            <i class="bi bi-exclamation-triangle me-2"></i><strong>¡Error!</strong> {{ session('error') }}
+            <i class="bi bi-exclamation-triangle me-2"></i><strong>¡Error!</strong> <?php echo e(session('error')); ?>
+
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    @endif
-    @if(session('exito'))
+    <?php endif; ?>
+    <?php if(session('exito')): ?>
         <div class="alert alert-success alert-dismissible fade show rounded-3 shadow-sm border-0" role="alert">
-            <i class="bi bi-check-circle me-2"></i>{{ session('exito') }}
+            <i class="bi bi-check-circle me-2"></i><?php echo e(session('exito')); ?>
+
             <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
         </div>
-    @endif
+    <?php endif; ?>
 
     <div class="card card-pe shadow-lg border-0">
 
-        {{-- Card header --}}
+        
         <div class="admin-card-header p-4 d-flex flex-wrap align-items-center justify-content-between gap-3 bg-white border-bottom">
             <div class="d-flex align-items-center gap-3">
                 <div class="rounded-circle p-3 shadow-sm bg-light text-primary">
@@ -30,13 +32,13 @@
                 </div>
             </div>
             
-            <a href="{{ route('admin.products.create') }}" class="btn btn-pe-primary rounded-pill px-4 fw-bold shadow-sm">
+            <a href="<?php echo e(route('admin.products.create')); ?>" class="btn btn-pe-primary rounded-pill px-4 fw-bold shadow-sm">
                 <i class="bi bi-plus-lg me-1"></i>Nuevo Producto
             </a>
         </div>
 
         <div class="card-body p-0">
-            @if(count($dishes) > 0)
+            <?php if(count($dishes) > 0): ?>
                 <div class="table-responsive">
                     <table class="table table-pe align-middle mb-0">
                         <thead class="bg-light">
@@ -49,52 +51,54 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($dishes as $dish)
+                            <?php $__currentLoopData = $dishes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $dish): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                             <tr class="border-bottom border-light">
                                 <td class="ps-4 py-3">
-                                    <img src="{{ asset($dish->image) }}" width="72" height="72"
-                                         class="rounded-3 shadow-sm object-fit-cover" alt="{{ $dish->name }}">
+                                    <img src="<?php echo e(asset($dish->image)); ?>" width="72" height="72"
+                                         class="rounded-3 shadow-sm object-fit-cover" alt="<?php echo e($dish->name); ?>">
                                 </td>
                                 <td class="py-3">
-                                    <span class="fw-bold text-dark">{{ $dish->name }}</span>
+                                    <span class="fw-bold text-dark"><?php echo e($dish->name); ?></span>
                                 </td>
                                 <td class="py-3">
-                                    <span class="badge rounded-pill bg-light text-dark border px-3 py-2 fw-bold">{{ $dish->price }} €</span>
+                                    <span class="badge rounded-pill bg-light text-dark border px-3 py-2 fw-bold"><?php echo e($dish->price); ?> €</span>
                                 </td>
                                 <td class="text-center py-3">
-                                    <a href="{{ route('admin.products.edit', $dish->id) }}"
+                                    <a href="<?php echo e(route('admin.products.edit', $dish->id)); ?>"
                                        class="btn btn-sm btn-light text-primary rounded-pill px-3 fw-bold border">
                                         <i class="bi bi-pencil me-1"></i>Editar
                                     </a>
                                 </td>
                                 <td class="text-center pe-4 py-3">
-                                    <form action="{{ route('admin.products.destroy', $dish->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
+                                    <form action="<?php echo e(route('admin.products.destroy', $dish->id)); ?>" method="POST">
+                                        <?php echo csrf_field(); ?>
+                                        <?php echo method_field('DELETE'); ?>
                                         <button class="btn btn-sm btn-link text-danger p-0 opacity-75 hover-opacity-100">
                                             <i class="bi bi-trash fs-5"></i>
                                         </button>
                                     </form>
                                 </td>
                             </tr>
-                            @endforeach
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </tbody>
                     </table>
                 </div>
-            @else
+            <?php else: ?>
                 <div class="text-center py-5">
                     <div class="mb-3" style="font-size:4rem; color:var(--pe-secondary); opacity:.1;">
                         <i class="bi bi-grid"></i>
                     </div>
                     <h4 class="fw-bold text-dark">No hay productos registrados</h4>
                     <p class="text-muted mb-4">Crea el primer plato del catálogo.</p>
-                    <a href="{{ route('admin.products.create') }}" class="btn btn-pe-primary rounded-pill px-4 fw-bold shadow-sm">
+                    <a href="<?php echo e(route('admin.products.create')); ?>" class="btn btn-pe-primary rounded-pill px-4 fw-bold shadow-sm">
                         <i class="bi bi-plus-lg me-1"></i>Crear Producto
                     </a>
                 </div>
-            @endif
+            <?php endif; ?>
         </div>
     </div>
 
 </div>
-@endsection
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.layout', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\ReposDAW2\prieto_eats\resources\views/admin/products/index.blade.php ENDPATH**/ ?>

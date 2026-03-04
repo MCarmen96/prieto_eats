@@ -17,8 +17,10 @@ class ProductOrder extends Model
         return $this->belongsTo(Order::class);
     }
 
+    // Relación con el producto-oferta
+    // Especificamos 'product_id' porque es el nombre de la columna en la tabla product_orders
     public function productOffer()
     {
-        return $this->belongsTo(ProductOffer::class);
+        return $this->belongsTo(ProductOffer::class, 'product_id');
     }
 }
