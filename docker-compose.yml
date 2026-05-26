@@ -15,7 +15,7 @@ services:
 
 
   # --- APLICACIÓN ---
-  app:
+  app_prietoeats:
     build:
       context: .
       dockerfile: Dockerfile
