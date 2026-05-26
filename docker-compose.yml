@@ -1,6 +1,6 @@
 services:
   # --- BASE DE DATOS ---
-  db:
+  db_prietoeats_mc:
     image: postgres:15
     container_name: prieto-eats-db
     restart: always
@@ -15,7 +15,7 @@ services:
 
 
   # --- APLICACIÓN ---
-  app_prietoeats:
+  app_prietoeats_mc:
     build:
       context: .
       dockerfile: Dockerfile
